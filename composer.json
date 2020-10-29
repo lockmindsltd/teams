@@ -1,0 +1,63 @@
+{
+    "name": "lockminds/teams",
+    "description": "Manage project teams and tasks",
+    "keywords": [
+        "lockminds",
+        "teams"
+    ],
+    "homepage": "https://github.com/lockminds/teams",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Kelvin Benard",
+            "email": "canwork.job@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "fightbulc/moment": "^1.32",
+        "illuminate/support": "^8.0.0",
+        "kreait/laravel-firebase": "^2.4",
+        "spatie/laravel-permission": "^3.17"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Lockminds\\Teams\\": "src/"
+        },
+        "classmap": [
+            "src/Classes/Theme/"
+        ],
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lockminds\\Teams\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lockminds\\Teams\\TeamsServiceProvider"
+            ],
+            "aliases": {
+                "Teams": "Lockminds\\Teams\\TeamsFacade"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    }
+}
