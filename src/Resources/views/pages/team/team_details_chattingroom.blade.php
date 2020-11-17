@@ -313,6 +313,42 @@
 
         }
 
+        function addMessage(message){
+
+            let dir = "end";
+            let col = "bg-light-primary";
+
+            if(message.from == "member_{{$user->id}}"){
+
+                dir = "end";
+                col = "bg-light-primary";
+
+            } else {
+
+                dir = "start";
+                col = "bg-light-info";
+            }
+
+            $( function(){
+                let container = $('div.messages');
+                let content = "<!--begin::Message Out-->\n" +
+                    "                                <div class=\"d-flex flex-column mb-5 align-items-"+dir+"\">\n" +
+                    "                                    <div class=\"d-flex align-items-center\">\n" +
+                    "                                        <div>\n" +
+                    "                                            <span class=\"text-muted font-size-sm\">"+moment(Number(message.date)).fromNow()+"</span>\n" +
+                    "                                        </div>\n"+
+                    "                                    </div>\n" +
+                    "                                    <div class=\"mt-2 rounded p-5  text-dark-50 font-weight-bold font-size-lg text-right max-w-400px "+col+"\">\n" + message.message +
+                    "                                    </div>\n" +
+                    "                                </div>\n" +
+                    "                                <!--end::Message Out-->";
+                container.append(content);
+
+                let objDiv = document.getElementById("messages");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            })
+        }
+
         function addMessageOut(message){
             $( function(){
                 let container = $('div.messages');
@@ -321,7 +357,6 @@
                     "                                    <div class=\"d-flex align-items-center\">\n" +
                     "                                        <div>\n" +
                     "                                            <span class=\"text-muted font-size-sm\">"+moment(Number(message.date)).fromNow()+"</span>\n" +
-                    "                                            <a href=\"#\" class=\"text-dark-75 text-hover-primary font-weight-bold font-size-h6\">You</a>\n" +
                     "                                        </div>\n"+
                     "                                    </div>\n" +
                     "                                    <div class=\"mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px\">\n" + message.message +
@@ -341,7 +376,6 @@
                 "                                <div class=\"d-flex flex-column mb-5 align-items-start\">\n" +
                 "                                    <div class=\"d-flex align-items-center\">\n" +
                 "                                        <div>\n" +
-                "                                            <a href=\"#\" class=\"text-dark-75 text-hover-primary font-weight-bold font-size-h6\">"+ message.name+"</a>\n" +
                 "                                            <span class=\"text-muted font-size-sm\">"+moment(Number(message.date)).fromNow()+"</span>\n" +
                 "                                        </div>\n" +
                 "                                    </div>\n" +
@@ -423,18 +457,21 @@
 
             ref.on('child_added', function (snapshot){
 
-                if(snapshot.val().from == "member_{{$user->id}}"){
+                addMessage(snapshot.val());
 
-                    addMessageOut(snapshot.val());
+                {{--if(snapshot.val().from == "member_{{$user->id}}"){--}}
 
-                } else {
+                {{--    addMessageOut(snapshot.val());--}}
 
-                        ref.child(snapshot.key).update({
-                            seen: true,
-                            delivered: true
-                        })
-                    addMessageIn(snapshot.val());
-                }
+                {{--} else {--}}
+
+                {{--        ref.child(snapshot.key).update({--}}
+                {{--            seen: true,--}}
+                {{--            delivered: true--}}
+                {{--        })--}}
+
+                {{--    addMessageIn(snapshot.val());--}}
+                {{--}--}}
             })
         }
 

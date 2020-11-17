@@ -30,7 +30,6 @@
         <!--begin::Contacts-->
         <div class="row">
 
-
             <!--begin::Aside-->
             <div class="col-md-4">
                 @php $color = $team['team_enabled'] ? "green" : "red"; @endphp
@@ -114,138 +113,215 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3 class="card-label">
-                                Team Members
+                                Invite Freelancers to <h3>{{$team['team_name']}}</h3>
                             </h3>
                         </div>
                     </div>
                 </div>
+                <!---------//row-------------->
                 <div class="row">
-            @php $classes = array("success",'danger','info','brand','danger','dark'); @endphp
-
-            @if($members->count()>0)
-
-                @foreach($members as $member)
-                    <!--begin::Col-->
-                        @php
-                            $color = $member['team_member_enabled'] ? "green" : "red";
-                        @endphp
-                        @if($member['team_member_id'] != $user->id)
-                            <div class="col-md-6">
-                                <!--begin::Card-->
-                                <div class="card card-custom gutter-b card-stretch " style="border-top: solid {{$color}} 3px;">
-                                    <!--begin::Body-->
-                                    <div class="card-body pt-4 d-flex flex-column justify-content-between ">
-
-                                       @can("edit teams") <!--begin::Toolbar-->
-                                        <div class="d-flex justify-content-end">
-                                            <div class="dropdown dropdown-inline">
-                                                <a href="#" class="btn btn-clean btn-hover-light-danger btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="ki ki-bold-more-hor"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                                    <!--begin::Navigation-->
-                                                    <ul class="navi navi-hover py-5">
-                                                        @if($member['team_member_enabled'])
-                                                            <li class="navi-item">
-                                                                <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link block-team-member">
-                                                                    <span class="navi-icon"><i class="flaticon-circle"></i></span>
-                                                                    <span class="navi-text">Block</span>
-                                                                </a>
-                                                            </li>
-                                                        @else
-                                                            <li class="navi-item">
-                                                                <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link enable-team-member">
-                                                                    <span class="navi-icon"><i class="flaticon2-checkmark"></i></span>
-                                                                    <span class="navi-text">Enable</span>
-                                                                </a>
-                                                            </li>
-                                                        @endif
-                                                        <li class="navi-item">
-                                                            <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link remove-team-member">
-                                                                <span class="navi-icon"><i class="flaticon2-checkmark"></i></span>
-                                                                <span class="navi-text">Remove</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!--end::Navigation-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Toolbar-->
-                                       @endcan
-                                        <!--begin::User-->
-                                        <div class="d-flex align-items-center mb-7">
-                                            <!--begin::Pic-->
-                                            <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
-                                                <div class="symbol symbol-75 mr-3">
-                                                    <div class="symbol-label" style="background-image: url({{config("app.url").'/'.config("taskmanager.uploads_folder").$member['avatar']}})"></div>
-                                                    <i class="symbol-badge bg-danger"></i>
-                                                </div>
-                                            </div>
-                                            <!--end::Pic-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="text-dark font-weight-bold text-hover-danger font-size-h4 mb-0">{{ucwords(strtolower($member->first_name.' '.$member->last_name))}}</a>
-                                                <span class="text-muted font-weight-bold">@if($member->team_member_owner == $member->team_member_id) Admin @else Member @endif </span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::User-->
-                                        <!--begin::Desc-->
-                                        <p class="mb-7">
-                                            {{mb_strimwidth($member['biography'], 0, 200, "...")}}
-                                        </p>
-                                        <!--end::Desc-->
-                                        <a href="{{route('lmteams-chatting',['team'=>$team['id'],'member'=>$member['team_member_id']])}}" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">Start Chatting</a>
-                                    </div>
-                                    <!--end::Body-->
+                    <div class="col-12">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group add-on">
+                                <input class="form-control" placeholder="Search by name,skills,profession" name="srch-term" id="srch-term" type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-light search" type="submit">
+                                        <i class="fa fa-search" style="font-size:18px"></i>
+                                    </button>
                                 </div>
-                                <!--end::Card-->
                             </div>
-                        @endif
-                        <!--end::Col-->
-                    @endforeach
+                        </form>
+                    </div>
+                </div>
+                <!---------//row-------------->
 
-                @else
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="alert alert-danger col-12" role="alert">
-                        This has no member(s) yet, Add One below
+                        <div class="card shadow" style="margin-top:30px; margin-bottom: 30px; padding: 20px; ">
+                            <p>Freelancers<br>
+                                Select one of the categories to quickly find a freelancer</p>
+
+                            <div class="row" style="margin: 10px;">
+
+                                @foreach($categories as $category)
+                                    <a href="?category={{$category->id}}">
+                                        <h5 style="margin-right: 5px;">
+                                            <button  class="btn btn-outline-dark category btn-sm smallcaps" style="width: 230px;">{{$category->category}}</button>
+                                        </h5>
+                                    </a>
+                                @endforeach
+
+
+
+                            </div>
+
+                        </div>
+                        <!-----------end of card------------------->
+                    </div>
+                </div>
+
+                <div class="row">
+
+                        <div class="col-12" >
+                            <style type="text/css">
+                                .sticky {
+                                    position: sticky;
+                                }
+                            </style>
+                            <div class="card shadow  mt-2 sticky" style="padding: 20px;">
+
+
+
+                                @if(!empty($sub_categories))
+
+                                    <div class="form-group">
+                                        <label for="input" class="control-label">Sort by subcategory</label>
+                                        <div class="">
+
+                                            @foreach($sub_categories as $sub_cat)
+
+
+                                                <a style="text-decoration: none;" href="?category={{$request->input('category')}}&sub_cat={{$sub_cat->id}}">   <button  class="btn btn-outline-dark category btn-sm smallcaps" style="width: 230px;"> {{$sub_cat->sub_cat}} </button> </a><br>
+
+
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+
+                            @endif
+                            <!-- <div class="form-group">
+          <label for="input" class="control-label">Sort by country</label>
+          <div class="">
+            <select name="" id="country" class="form-control" required="required">
+              <option value="">Select country</option>
+              @foreach($countries as $country)
+                                <option value="{{$country->country}}">
+
+               </option>
+              @endforeach
+
+                                </select>
+                              </div>
+                            </div> -->
+                                <!-------end of form group------------------>
+
+                                <div class="form-group">
+                                    <label for="input" class="control-label">Sort by skills</label>
+                                    <div class="">
+                                        <select name="" id="skill" class="form-control" required="required">
+                                            <option value="">Select Skill</option>
+
+                                            @foreach($skills as $skill)
+                                                <option value="{{$skill->id}}">{{$skill->skill}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!----end of first card----------------------->
+
+                        </div>
+                        <!------------end of column-------------------->
+
+
+                        <div class="col-12">
+
+                            <div class="freelancers" >
+
+                                <!--------------------start of freelancer card------------------------------------->
+                                @foreach($freelancers as $freelancer)
+
+{{--                            @if( \Lockminds\Teams\Teams::isTeaMember($team['id'],$freelancer) == false)--}}
+                                <div class="card shadow" style="margin-top: 10px;">
+                                            <div class="media p-2">
+
+
+                                                <img class="mr-3 rounded-circle landing-person" src="/{{$freelancer->user->image }}"
+                                                     style="width: 100px;height: 100px;">
+
+
+
+                                                <div class="media-body">
+
+                                                    <div class="d-flex justify-content-between">
+
+                                                        <div>
+                                                            <p style="font-size: 11pt;">
+                                                                <b>  {{$freelancer->user->first_name}} {{$freelancer->user->last_name}}</b><br>
+
+                                                                {{App\WorldCity::where('id',$freelancer->city)->first()->city}},
+                                                            {{App\WorldCountry::where('id',$freelancer->country)->first()->name}}
+
+                                                            <div class="mt-1 mx-2">
+
+                                                                @foreach(App\FreelancerSpecialSkill::where('freelancer_id',$freelancer->id)->get() as $freelancer_skill)
+
+                                                                    <span class="badge badge-secondary">
+                                                                            {{$freelancer_skill->skill}}
+                                                                    </span>
+
+
+                                                                @endforeach
+                                                            </div>
+                                                            <br>
+                                                            <p class="more">  {{mb_strimwidth($freelancer->biography, 0, 200, "...")}} </p><br><br>
+
+                                                            </p>
+                                                        </div>
+
+                                                        <?php
+                                                        $rate=$freelancer->rate;
+                                                        ?>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-9"></div>
+                                                        <div class="col-md-3">
+                                                            <div class="text-center pull-right">
+                                                                @if(\Lockminds\Teams\Teams::isInvited($team['id'],$freelancer->user->id))
+
+                                                                        <button type="button" class="btn btn-outline-warning btn-work">
+                                                                            Invited To Team
+                                                                        </button>
+                                                                @else
+                                                                    <a href="?invite={{$freelancer->user->id}}">
+                                                                        <button type="button" class="btn btn-outline-dark btn-work">
+                                                                            Invite To Team
+                                                                        </button>
+                                                                    </a>
+                                                                @endif
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+{{--                            @endif--}}
+
+
+
+                                @endforeach
+                            <!-----------------end of card--------------------------------->
+
+
+
+                                <!-----------------end of card--------------------------------->
+
+                            </div>
+
+                        </div>
+                        <!----------end of column------------------------->
+
                     </div>
 
-                @can('edit teams')
-                    <form method="post" class="card col-12" id="create-team-form" enctype='multipart/form-data'>
-                        @csrf
-                        <br/>
-                        <div class="row form-group">
-                            <div class="col-12">
-                                <label>Pick Member(s) <b class="text-danger">*</b></label>
-                                <select multiple class="form-control members" name="members[]" placeholder="Team name" required>
-
-                                    @if(!empty($users = \Illuminate\Foundation\Auth\User::all()))
-                                        @foreach($users as $freelancer)
-                                            <option value="{{$freelancer->id}}">{{$freelancer->first_name." ".$freelancer->first_name." - ".$freelancer->id}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-12">
-                                <label>Welcome message <b class="text-danger">*</b></label>
-                                <Textarea class="form-control" name="welcome_message" placeholder="Team Description" required ></Textarea>
-                            </div>
-                        </div>
-                        <div class="row form-group align-item-right">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4 pull-right align-item-right">
-                                <button type="submit" class="btn btn-block btn-danger pull-right">Add Member(s)</button>
-                            </div>
-                        </div>
-                    </form>
-                @endcan
-
-                @endif
-            </div>
             </div>
             <!--end::Content-->
         </div>
@@ -446,5 +522,8 @@
             });
         });
 
+        $( function(){
+            $("select").select2({placholder: "Select Option"});
+        })
     </script>
 @endsection

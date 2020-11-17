@@ -5,7 +5,26 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b5188d4-26da-4290-9ea5-615baac7ea5e" name="Default Changelist" comment="Artisan command seeding" />
+    <list default="true" id="9b5188d4-26da-4290-9ea5-615baac7ea5e" name="Default Changelist" comment="Project Initiation">
+      <change afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_members_invitations.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_members_invite.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Database/Migrations/2020_09_15_095958_teams_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database/Migrations/2020_09_15_095958_teams_tables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Http/Controllers/Team/TeamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Http/Controllers/Team/TeamController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Http/Controllers/ToolsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Http/Controllers/ToolsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/layout/base/_aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/layout/base/_aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/tasks/completestasks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/tasks/completestasks.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/tasks/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/tasks/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/tasks/newtasks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/tasks/newtasks.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/tasks/progresstasks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/tasks/progresstasks.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_chatroom.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_chatroom.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_chattingroom.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_chattingroom.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_members.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_members.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_menus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/team/team_details_menus.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/views/pages/tools/invitations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/views/pages/tools/invitations.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teams.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teams.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,7 +176,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Console" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Resources/views/pages/team" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -169,17 +188,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PROJECTS\teams\src\Resources\views\pages\team" />
+      <recent name="D:\PROJECTS\teams\src\Database\Migrations" />
+      <recent name="D:\PROJECTS\teams\src\Console" />
+      <recent name="D:\PROJECTS\teams\src\Resources\views\pages\tools" />
+      <recent name="D:\PROJECTS\teams\src\Models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PROJECTS\teams\src\Resources\views\pages\tasks" />
       <recent name="D:\PROJECTS\LARAVEL\teams\src\Resources\assets\js" />
       <recent name="D:\PROJECTS\LARAVEL\teams\src\Models" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\PROJECTS\teams\src\Console" />
-      <recent name="D:\PROJECTS\teams\src\Resources\views\pages\tools" />
-      <recent name="D:\PROJECTS\teams\src\Models" />
-      <recent name="D:\PROJECTS\teams\src\Http\Controllers" />
-      <recent name="D:\PROJECTS\teams\src\Resources\views\pages\tasks" />
     </key>
   </component>
   <component name="RunManager">
@@ -240,6 +259,20 @@
       <workItem from="1603885578367" duration="22000" />
       <workItem from="1603950816301" duration="27883000" />
       <workItem from="1603997116025" duration="3966000" />
+      <workItem from="1604001091784" duration="718000" />
+      <workItem from="1603996682506" duration="3269000" />
+      <workItem from="1604066992798" duration="599000" />
+      <workItem from="1604078583407" duration="619000" />
+      <workItem from="1604143178636" duration="162000" />
+      <workItem from="1604160120307" duration="3339000" />
+      <workItem from="1604168325064" duration="1198000" />
+      <workItem from="1604251251079" duration="597000" />
+      <workItem from="1605538189056" duration="3747000" />
+      <workItem from="1605593205400" duration="889000" />
+      <workItem from="1605562593276" duration="12590000" />
+      <workItem from="1605623201321" duration="3636000" />
+      <workItem from="1605626911725" duration="5645000" />
+      <workItem from="1605632966829" duration="2741000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1601038109673</created>
@@ -430,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604000640705</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Project Initiation">
+      <created>1604001484563</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1604001484564</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,6 +489,8 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initialize" />
     <MESSAGE value="configuring template" />
@@ -468,13 +510,18 @@
     <MESSAGE value="Artisan command extended 1" />
     <MESSAGE value="Artisan command extended 2" />
     <MESSAGE value="Artisan command seeding" />
-    <option name="LAST_COMMIT_MESSAGE" value="Artisan command seeding" />
+    <MESSAGE value="Project Initiation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project Initiation" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="75" key="#Deployment" timestamp="1603264223128">
+    <state x="361" y="75" key="#Deployment" timestamp="1605593993692">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="75" key="#Deployment/0.0.1536.834@0.0.1536.834" timestamp="1603264223128" />
+    <state x="361" y="75" key="#Deployment/0.0.1536.834@0.0.1536.834" timestamp="1605593993692" />
+    <state x="444" y="98" key="#Options" timestamp="1605541859139">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="444" y="98" key="#Options/0.0.1536.834@0.0.1536.834" timestamp="1605541859139" />
     <state x="535" y="219" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601046101086">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -491,18 +538,22 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="499" y="164" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.834@0.0.1536.834" timestamp="1603816612076" />
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603709841692">
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605617076351">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1603709841692" />
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1605617076351" />
     <state x="545" y="329" key="ComposerInitDialogKey" timestamp="1601037629805">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="545" y="329" key="ComposerInitDialogKey/0.0.1536.834@0.0.1536.834" timestamp="1601037629805" />
-    <state x="434" y="156" key="FileChooserDialogImpl" timestamp="1603885598818">
+    <state x="434" y="156" key="FileChooserDialogImpl" timestamp="1605616626251">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="434" y="156" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1603885598818" />
+    <state x="434" y="156" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1605616626251" />
+    <state x="147" y="65" key="MergeDialog" timestamp="1605594030167">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="147" y="65" key="MergeDialog/0.0.1536.834@0.0.1536.834" timestamp="1605594030167" />
     <state x="594" y="140" key="NewPhpClassDialog" timestamp="1603824666824">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -515,29 +566,33 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="277" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1603798141691" />
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1604000985264">
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1604001515739">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1604000985264" />
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1604001515739" />
     <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604001086058">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1604001086058" />
+    <state x="642" y="151" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1604001421621">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="642" y="151" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1536.834@0.0.1536.834" timestamp="1604001421621" />
     <state x="586" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601038306073">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="586" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1601038306073" />
-    <state x="654" y="147" key="ftp.server.browser" timestamp="1601743858567">
+    <state x="654" y="147" key="ftp.server.browser" timestamp="1605593992093">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="654" y="147" key="ftp.server.browser/0.0.1536.834@0.0.1536.834" timestamp="1601743858567" />
-    <state x="570" y="323" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1601037966909">
+    <state x="654" y="147" key="ftp.server.browser/0.0.1536.834@0.0.1536.834" timestamp="1605593992093" />
+    <state x="570" y="323" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1604001345666">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="570" y="323" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.834@0.0.1536.834" timestamp="1601037966909" />
-    <state x="638" y="309" key="publish.login" timestamp="1603264124769">
+    <state x="570" y="323" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.834@0.0.1536.834" timestamp="1604001345666" />
+    <state x="638" y="309" key="publish.login" timestamp="1605593265028">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="638" y="309" key="publish.login/0.0.1536.834@0.0.1536.834" timestamp="1603264124769" />
+    <state x="638" y="309" key="publish.login/0.0.1536.834@0.0.1536.834" timestamp="1605593265028" />
   </component>
 </project>

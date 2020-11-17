@@ -114,138 +114,62 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3 class="card-label">
-                                Team Members
+                                Invitations
+                                <small>View invitation status</small>
                             </h3>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-            @php $classes = array("success",'danger','info','brand','danger','dark'); @endphp
+                <div class="card-bodsy">
+                    @php
+                        $invs = \Lockminds\Teams\Models\LockmindsInvitations::Where("invitation_team",$team['id'])->leftJoin('users', 'invitation_member', '=', 'users.id')->get();
+                    @endphp
 
-            @if($members->count()>0)
-
-                @foreach($members as $member)
-                    <!--begin::Col-->
-                        @php
-                            $color = $member['team_member_enabled'] ? "green" : "red";
-                        @endphp
-                        @if($member['team_member_id'] != $user->id)
-                            <div class="col-md-6">
-                                <!--begin::Card-->
-                                <div class="card card-custom gutter-b card-stretch " style="border-top: solid {{$color}} 3px;">
-                                    <!--begin::Body-->
-                                    <div class="card-body pt-4 d-flex flex-column justify-content-between ">
-
-                                       @can("edit teams") <!--begin::Toolbar-->
-                                        <div class="d-flex justify-content-end">
-                                            <div class="dropdown dropdown-inline">
-                                                <a href="#" class="btn btn-clean btn-hover-light-danger btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="ki ki-bold-more-hor"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                                    <!--begin::Navigation-->
-                                                    <ul class="navi navi-hover py-5">
-                                                        @if($member['team_member_enabled'])
-                                                            <li class="navi-item">
-                                                                <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link block-team-member">
-                                                                    <span class="navi-icon"><i class="flaticon-circle"></i></span>
-                                                                    <span class="navi-text">Block</span>
-                                                                </a>
-                                                            </li>
-                                                        @else
-                                                            <li class="navi-item">
-                                                                <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link enable-team-member">
-                                                                    <span class="navi-icon"><i class="flaticon2-checkmark"></i></span>
-                                                                    <span class="navi-text">Enable</span>
-                                                                </a>
-                                                            </li>
-                                                        @endif
-                                                        <li class="navi-item">
-                                                            <a  href="javascript:(0);" data-team="{{$team['id']}}" data-member="{{$member['team_member_id']}}"  class="navi-link remove-team-member">
-                                                                <span class="navi-icon"><i class="flaticon2-checkmark"></i></span>
-                                                                <span class="navi-text">Remove</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!--end::Navigation-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Toolbar-->
-                                       @endcan
-                                        <!--begin::User-->
-                                        <div class="d-flex align-items-center mb-7">
-                                            <!--begin::Pic-->
-                                            <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
-                                                <div class="symbol symbol-75 mr-3">
-                                                    <div class="symbol-label" style="background-image: url({{config("app.url").'/'.config("taskmanager.uploads_folder").$member['avatar']}})"></div>
-                                                    <i class="symbol-badge bg-danger"></i>
-                                                </div>
-                                            </div>
-                                            <!--end::Pic-->
-                                            <!--begin::Title-->
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="text-dark font-weight-bold text-hover-danger font-size-h4 mb-0">{{ucwords(strtolower($member->first_name.' '.$member->last_name))}}</a>
-                                                <span class="text-muted font-weight-bold">@if($member->team_member_owner == $member->team_member_id) Admin @else Member @endif </span>
-                                            </div>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::User-->
-                                        <!--begin::Desc-->
-                                        <p class="mb-7">
-                                            {{mb_strimwidth($member['biography'], 0, 200, "...")}}
-                                        </p>
-                                        <!--end::Desc-->
-                                        <a href="{{route('lmteams-chatting',['team'=>$team['id'],'member'=>$member['team_member_id']])}}" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">Start Chatting</a>
+                    @if($invs->count()>0)
+                        @foreach($invs as $item)
+                            <!--begin::Item-->
+                                @php
+                                    $invitor = App\User::find($item['invitation_invitor']);
+                                    if(!$item['invitation_status']){
+                                        $statusClass = "bg-light--warning";
+                                    }else{
+                                        $statusClass = "bg-light-dark";
+                                    }
+                                @endphp
+                                <div id="team-{{$item['intitation_team']}}" class="shadow mb-3 {{$statusClass}} rounded p-5">
+                                    <!--begin::Title-->
+                                    <div class="d-flex flex-column flex-grow-1 mr-2">
+                                        <p><span class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><span class="font-size-h3">{{$item['first_name'].' '.$item['last_name']}}</span> </span></p>
+                                        <p><b>{{nl2br($item['invitation_message'])}}</b></p>
                                     </div>
-                                    <!--end::Body-->
+                                    <!--end::Title-->
+
+                                    <div class="clearfix"></div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <hr/>
+                                            <h6>Invitation Status</h6>
+                                            @if(!$item['invitation_status'])
+                                                <h3>Pending</h3>
+                                            @else
+                                                <h3>Declined</h3>
+                                                <p>{{nl2br($item['invitation_reason'])}}</p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-2">
+                                            <!--begin::Lable-->
+                                            @can('edit teams')
+                                                <a onclick="decline({{$item['invitation_member']}})" href="#"><span class="btn btn-sm btn-warning  font-weight-bolder py-1 font-size-lg">Cancel</span></a>
+                                                <!--end::Lable-->
+                                            @endcan
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <!--end::Card-->
-                            </div>
+                                <!--end::Item-->
+                            @endforeach
                         @endif
-                        <!--end::Col-->
-                    @endforeach
-
-                @else
-
-                    <div class="alert alert-danger col-12" role="alert">
-                        This has no member(s) yet, Add One below
-                    </div>
-
-                @can('edit teams')
-                    <form method="post" class="card col-12" id="create-team-form" enctype='multipart/form-data'>
-                        @csrf
-                        <br/>
-                        <div class="row form-group">
-                            <div class="col-12">
-                                <label>Pick Member(s) <b class="text-danger">*</b></label>
-                                <select multiple class="form-control members" name="members[]" placeholder="Team name" required>
-
-                                    @if(!empty($users = \Illuminate\Foundation\Auth\User::all()))
-                                        @foreach($users as $freelancer)
-                                            <option value="{{$freelancer->id}}">{{$freelancer->first_name." ".$freelancer->first_name." - ".$freelancer->id}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-12">
-                                <label>Welcome message <b class="text-danger">*</b></label>
-                                <Textarea class="form-control" name="welcome_message" placeholder="Team Description" required ></Textarea>
-                            </div>
-                        </div>
-                        <div class="row form-group align-item-right">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4 pull-right align-item-right">
-                                <button type="submit" class="btn btn-block btn-danger pull-right">Add Member(s)</button>
-                            </div>
-                        </div>
-                    </form>
-                @endcan
-
-                @endif
-            </div>
+                </div>
             </div>
             <!--end::Content-->
         </div>
@@ -446,5 +370,49 @@
             });
         });
 
+        function decline(member){
+            let data = {'team':'{{$team['id']}}','member':member}
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to Cancel invitation",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Accept!"
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "{{route('lmtools-decline-invitation')}}",
+                        data: data,
+                        beforeSend: function(){
+                            KTApp.blockPage({
+                                overlayColor: 'red',
+                                state: 'warning', // a bootstrap color
+                                size: 'lg', //available custom sizes: sm|lg
+                                message: 'Please wait...'
+                            })
+                        },
+                        success: function(getResult){
+                            KTApp.unblockPage();
+                            const result = JSON.parse(getResult);
+                            if(result.status == true){
+                                Swal.fire("", result.message, "success");
+                                window.location.reload();
+                                $("div#team-"+team).hide();
+                            }else {
+                                Swal.fire("", result.message, "warning");
+                            }
+                        },
+                        error: function(xhr){
+                            KTApp.unblockPage();
+                            Swal.fire("",xhr.statusText,'warning');
+                        }
+                    })
+                }
+            });
+        }
+
+
     </script>
+
+
 @endsection

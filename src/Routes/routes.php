@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::any('invitations', [ToolsController::class, 'invitations'])->name("lmtools-invitations");
         Route::any('accept-invitation', [ToolsController::class, 'accept_invitation'])->name("lmtools-accept-invitation");
         Route::any('decline-invitation', [ToolsController::class, 'decline_invitation'])->name("lmtools-decline-invitation");
+        Route::any('decline-invitation-update', [ToolsController::class, 'decline_invitation_update'])->name("lmtools-decline-invitation-update");
         Route::any('syncperms/{user}/{role}', [ToolsController::class, 'syncPermissions'])->name("lmtools-syncperms");
         Route::any('messages', [ToolsController::class, 'messages'])->name("lmtools-messages");
     });
@@ -50,9 +51,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::any('dashbaord', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'index'])->name("lmteams-dashbaord");
 
         Route::any('details/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'details'])->name("lmteams-team-details");
+        Route::any('detailsred', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'detailsred'])->name("lmteams-team-details-red");
 
         Route::any('tasks/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'tasks'])->name("lmteams-team-tasks");
         Route::any('members/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'members'])->name("lmteams-team-members");
+        Route::any('members/invite/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'members_invite'])->name("lmteams-team-members-invite");
+        Route::any('members/invitations/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'members_invitations'])->name("lmteams-team-members-invitations");
         Route::any('chatroom/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'chatroom'])->name("lmteams-team-chatroom");
         Route::any('chattingroom/{team}/{member}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'chattingroom'])->name("lmteams-chatting");
         Route::any('videoroom/{id}', [\Lockminds\Teams\Http\Controllers\Team\TeamController::class, 'members'])->name("lmteams-team-videoroom");

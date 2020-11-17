@@ -13,7 +13,7 @@
             @if($action_status)
                 @php $class = "success"; @endphp
             @else
-                @php $class = "danger" @endphp
+                @php $class = "warning" @endphp
             @endif
             <div class="row">
                 <div class="col-12">
@@ -67,7 +67,7 @@
                                                         foreach ($tasks as $task){
                                                                     switch (strtolower($task['task_status'])){
                                                                             case "new":
-                                                                                $colorClass = "danger";
+                                                                                $colorClass = "warning";
                                                                                 break;
                                                                             case "on progress":
                                                                             $colorClass = "primary";

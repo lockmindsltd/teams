@@ -32,6 +32,19 @@
                     </div>
                 </a>
             </li>
+            @can('edit teams')
+            <li class="navi-item">
+                <a class="navi-link" href="{{route("lmteams-team-members-invitations",['id'=>$team['id']])}}">
+                    <div class="symbol mr-3">
+                        <span class="symbol-label"><i class="flaticon2-bell icon-lg"></i></span>
+                    </div>
+                    <div class="navi-text">
+                        <span class="d-block font-weight-bold">Invitations</span>
+                        <span class="text-muted">View Pending Invitations</span>
+                    </div>
+                </a>
+            </li>
+            @endcan
 {{--            <li class="navi-item">--}}
 {{--                <a class="navi-link" href="{{route("lmteams-team-videoroom",['id'=>$team['id']])}}">--}}
 {{--                    <div class="symbol mr-3">--}}

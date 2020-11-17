@@ -43,18 +43,33 @@
                 @if($invs->count()>0)
                     @foreach($invs as $item)
                         <!--begin::Item-->
-                    <div id="team-{{$item['intitation_team']}}" class="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
+                        @php
+                        $invitor = App\User::find($item['invitation_invitor']);
+                        @endphp
+                    <div id="team-{{$item['intitation_team']}}" class=" mb-9 bg-light-warning rounded p-5">
                             <!--begin::Title-->
                             <div class="d-flex flex-column flex-grow-1 mr-2">
-                                <a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><h3>{{$item['team_name']}}</h3></a>
+                                <p>You have been invited by <span class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"><span class="font-size-h3">{{$invitor->first_name.' '.$invitor->last_name}}</span> to Join <span class="font-size-h3">{{$item['team_name']}}</span></span> </p>
                                 <p><b>{{nl2br($item['invitation_message'])}}</b></p>
-                                <p>{{nl2br($item['team_description'])}}</p>
                             </div>
-                            <!--end::Title-->
-                            <!--begin::Lable-->
-                                <a onclick="accept({{$item['invitation_team']}})" href="#"><span class="font-weight-bolder text-success py-1 font-size-lg">Accept</span></a>&nbsp<br/>
-                                <a onclick="decline({{$item['invitation_team']}})" href="#"><span class="font-weight-bolder text-warning py-1 font-size-lg">Decline</span></a>
-                            <!--end::Lable-->
+                            <!--end::Title--><hr/>
+                        <div class="row">
+                            <div class="col-md-8">
+                                @if(!$item['invitation_status'])
+                                    <h3>Pending</h3>
+                                @else
+                                    <h3>Declined</h3>
+                                    <p>{{nl2br($item['invitation_reason'])}}</p>
+                                @endif
+                            </div>
+                            <div class="col-md-4">
+                                <!--begin::Lable-->
+                                <a onclick="accept({{$item['invitation_team']}})" href="#"><span class="btn btn-sm btn-success font-weight-bolder font-size-lg pull-right">Accept</span></a>&nbsp
+                                <a onclick="decline({{$item['invitation_team']}})" href="#"><span class="btn btn-sm btn-warning  font-weight-bolder font-size-lg pull-right">Decline</span></a>
+                                <!--end::Lable-->
+                            </div>
+                        </div>
+
                     </div>
                     <!--end::Item-->
                         @endforeach
@@ -95,7 +110,7 @@
                             const result = JSON.parse(getResult);
                             if(result.status == true){
                                 Swal.fire("", result.message, "success");
-                                window.location.reload();
+                                window.location.href = "{{route('lmteams-team-details-red')}}?team="+team;
                                 $("div#team-"+team).hide();
                             }else {
                                 Swal.fire("", result.message, "warning");
@@ -111,44 +126,52 @@
         }
 
         function decline(team){
-            let data = {'team':team,'member':'{{$user->id}}'}
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You want to accept invitation",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, Accept!"
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                        url: "{{route('lmtools-decline-invitation')}}",
-                        data: data,
-                        beforeSend: function(){
-                            KTApp.blockPage({
-                                overlayColor: 'red',
-                                state: 'warning', // a bootstrap color
-                                size: 'lg', //available custom sizes: sm|lg
-                                message: 'Please wait...'
-                            })
-                        },
-                        success: function(getResult){
-                            KTApp.unblockPage();
-                            const result = JSON.parse(getResult);
-                            if(result.status == true){
-                                Swal.fire("", result.message, "success");
-                                window.location.reload();
-                                $("div#team-"+team).hide();
-                            }else {
-                                Swal.fire("", result.message, "warning");
+
+            var reason = prompt("Please enter a reason for not accepting", "");
+            if (reason != null && reason != "") {
+                let data = {'team':team,'member':'{{$user->id}}','reason':reason}
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You want to decline invitation",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, Accept!"
+                }).then(function(result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: "{{route('lmtools-decline-invitation-update')}}",
+                            data: data,
+                            beforeSend: function(){
+                                KTApp.blockPage({
+                                    overlayColor: 'red',
+                                    state: 'warning', // a bootstrap color
+                                    size: 'lg', //available custom sizes: sm|lg
+                                    message: 'Please wait...'
+                                })
+                            },
+                            success: function(getResult){
+                                KTApp.unblockPage();
+                                const result = JSON.parse(getResult);
+                                if(result.status == true){
+                                    Swal.fire("", result.message, "success");
+                                    window.location.reload();
+                                    $("div#team-"+team).hide();
+                                }else {
+                                    Swal.fire("", result.message, "warning");
+                                }
+                            },
+                            error: function(xhr){
+                                KTApp.unblockPage();
+                                Swal.fire("",xhr.statusText,'warning');
                             }
-                        },
-                        error: function(xhr){
-                            KTApp.unblockPage();
-                            Swal.fire("",xhr.statusText,'warning');
-                        }
-                    })
-                }
-            });
+                        })
+                    }
+                });
+            }else{
+                Swal.fire("", "You just provide a reason", "warning");
+            }
+
+
         }
 
     </script>

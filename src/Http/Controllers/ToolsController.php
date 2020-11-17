@@ -63,6 +63,7 @@ class ToolsController extends MyController
             if($model->save()){
                 $delete =  LockmindsInvitations::Where("invitation_member",$request->member)->Where('invitation_team',$request->team)->first();
                 $delete->delete();
+             //   return redirect()->route('lmteams-team-members', ['id' => $request->team]);
                 $output['status'] = true;
                 $output['message'] = "You have successfully accepted invitation";
             }else{
@@ -76,7 +77,7 @@ class ToolsController extends MyController
 
     }
 
-    public function decline_invitation(Request $request, $team = "", $member =""){
+    public function decline_invitation(Request $request){
         if(empty($request->team) || empty($request->member)){
             $output['status'] = false;
             $output['message'] = "We could not get information to enable";
@@ -96,6 +97,27 @@ class ToolsController extends MyController
 
     }
 
+    public function decline_invitation_update(Request $request){
+        if(empty($request->team) || empty($request->member)){
+            $output['status'] = false;
+            $output['message'] = "We could not get information to enable";
+        }else{
+            $delete =  LockmindsInvitations::Where("invitation_member",$request->member)->Where('invitation_team',$request->team)->first();
+            $delete->invitation_status = 1;
+            $delete->invitation_reason = $request->reason;
+            if($delete->save()){
+                $output['status'] = true;
+                $output['message'] = "You have successfully declined invitation";
+            }else{
+                $output['status'] = true;
+                $output['message'] = $delete->errors();
+            }
+
+        }
+
+        print \GuzzleHttp\json_encode($output,JSON_PRETTY_PRINT);
+
+    }
 
     public function syncPermissions(Request $request, $type,$role){
         $users = User::Where("user_type",$type)->get();

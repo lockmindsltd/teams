@@ -85,6 +85,8 @@ class TeamsTables extends Migration
             $table->engine ='InnoDB';
             $table->bigIncrements('id');
             $table->bigInteger('invitation_team');
+            $table->bigInteger('invitation_invitor');
+            $table->text("invitation_reason")->nullable();
             $table->bigInteger('invitation_member');
             $table->string('invitation_message');
             $table->boolean('invitation_status')->default(0);

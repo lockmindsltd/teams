@@ -327,12 +327,17 @@
         }
 
         function addMessageIn(message){
+            if(message.name == undefined){
+                name = "";
+            }else{
+                name = message.name;
+            }
             let container = $('div.messages');
             let content = " <!--begin::Message In-->\n" +
                 "                                <div class=\"d-flex flex-column mb-5 align-items-start\">\n" +
                 "                                    <div class=\"d-flex align-items-center\">\n" +
                 "                                        <div>\n" +
-                "                                            <a href=\"#\" class=\"text-dark-75 text-hover-primary font-weight-bold font-size-h6\">Nich Larson</a>\n" +
+                "                                            <a href=\"#\" class=\"text-dark-75 text-hover-primary font-weight-bold font-size-h6\">"+name+"</a>\n" +
                 "                                            <span class=\"text-muted font-size-sm\">"+moment(Number(message.date)).fromNow()+"</span>\n" +
                 "                                        </div>\n" +
                 "                                    </div>\n" +
@@ -347,6 +352,45 @@
 
         }
 
+        function addMessage(message){
+
+            let dir = "end";
+            let col = "bg-light-primary";
+
+
+            if(message.sender == "{{$user->id}}"){
+
+                dir = "end";
+                col = "bg-light-primary";
+
+            } else {
+
+                dir = "start";
+                col = "bg-light-info";
+            }
+
+            $( function(){
+                let container = $('div.messages');
+                let content = "<!--begin::Message Out-->\n" +
+                    "                                <div class=\"d-flex flex-column mb-5 align-items-"+dir+"\">\n" +
+                    "                                    <div class=\"d-flex align-items-center\">\n" +
+                    "                                        <div>\n" +
+                    "                                            <a href=\"#\" class=\"text-dark-75 text-hover-primary font-weight-bold font-size-h6\">"+message.name+"</a>\n" +
+                    "                                            <span class=\"text-muted font-size-sm\">"+moment(Number(message.date)).fromNow()+"</span>\n" +
+                    "                                        </div>\n"+
+                    "                                    </div>\n" +
+                    "                                    <div class=\"mt-2 rounded p-5  text-dark-50 font-weight-bold font-size-lg text-right max-w-400px "+col+"\">\n" + message.message +
+                    "                                    </div>\n" +
+                    "                                </div>\n" +
+                    "                                <!--end::Message Out-->";
+                container.append(content);
+
+                let objDiv = document.getElementById("messages");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            })
+        }
+
+
         function postMessage(message){
 
             let currentDate = new Date().getTime().toString();
@@ -359,9 +403,10 @@
             ref.child(key).set({
                 type: 'text',
                 date: currentDate,
-                sender: userData.uid,
+                sender: "{{$user->id}}",
                 message: message,
-                seen: false
+                seen: false,
+                name: "{{$user->first_name.' '.$user->last_name}}"
             });
         }
 
@@ -394,11 +439,8 @@
 
             ref.on('child_added', function (snapshot){
 
-                if(snapshot.val().sender == userData.uid){
-                    addMessageOut(snapshot.val());
-                } else {
-                    addMessageIn(snapshot.val());
-                }
+                addMessage(snapshot.val())
+
 
             })
         }
