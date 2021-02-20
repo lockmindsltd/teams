@@ -42,6 +42,25 @@
             </div>
         @endif
 
+        <br>
+        <a href="/post-project">
+
+          <button class="workspace_btn btn btn-warning btn-lg" style=" border-color:#f05a28;  background-color: #f05a28;">Post A Job
+
+          <i class="mdi mdi-plus"></i>
+        </button>
+      </a>
+
+      <br>
+      <a href="/lmteams">
+
+        <button class="workspace_btn btn btn-warning btn-lg" style=" border-color:#f05a28;  background-color: #f05a28;">Create Team
+
+        <i class="mdi mdi-plus"></i>
+      </button>
+    </a>
+
+
         <div id="kt_aside_menu"
              class="aside-menu my-4 {{ \Lockminds\Teams\Classes\Metronic::printClasses('aside_menu', false) }}"
              data-menu-vertical="1"

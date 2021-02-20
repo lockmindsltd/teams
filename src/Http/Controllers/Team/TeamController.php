@@ -29,6 +29,7 @@ class TeamController extends MyController
         $this->teamModel = new LockmindsTeams();
         $this->teamMembersModel = new LockmindsTeamMembers();
         $this->teamTasksModel =  new LockmindsTeamTasks();
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
